@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <head>
   <meta charset="UTF-8">
-  <title>留言板</title>
+  <title>櫻花留言板</title>
   <style>
     body {
       margin: 0;
@@ -84,7 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </head>
 
 <body>
-  <h1>🌸 留言板 🌸</h1>
+  <h1>🌸 櫻花留言板 🌸</h1>
 
   <form method="POST" action="">
     <input type="text" name="name" placeholder="你的名字" required>
@@ -136,6 +136,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         r: Math.random() * 20 + 20,
         d: Math.random() * 1 + 0.5
       });
+    }
+
+    function drawSakura() {
+      ctx.clearRect(0, 0, width, height);
+      for (let i = 0; i < sakuraCount; i++) {
+        const p = sakuras[i];
+        ctx.save();
+        ctx.globalAlpha = 0.8;
+        ctx.drawImage(sakuraImage, p.x, p.y, p.size, p.size);
+        ctx.restore();
+      }
+
+      updateSakura();
     }
 
     function updateSakura() {
