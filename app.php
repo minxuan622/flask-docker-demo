@@ -4,18 +4,19 @@ $filename = "messages.txt";
 
 // 如果使用者送出留言
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $name = htmlspecialchars($_POST["name"]);
-    $message = htmlspecialchars($_POST["message"]);
-    $timestamp = date("Y-m-d H:i:s");
-    $entry = "$timestamp | $name: $message\n";
-    file_put_contents($filename, $entry, FILE_APPEND);
+  $name = htmlspecialchars($_POST["name"]);
+  $message = htmlspecialchars($_POST["message"]);
+  $timestamp = date("Y-m-d H:i:s");
+  $entry = "$timestamp | $name: $message\n";
+  file_put_contents($filename, $entry, FILE_APPEND);
 }
 ?>
 <!DOCTYPE html>
 <html lang="zh-Hant">
+
 <head>
   <meta charset="UTF-8">
-  <title>櫻花留言板</title>
+  <title>留言板</title>
   <style>
     body {
       margin: 0;
@@ -35,7 +36,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       width: 300px;
     }
 
-    input, textarea {
+    input,
+    textarea {
       width: 100%;
       margin: 8px 0;
       padding: 8px;
@@ -80,8 +82,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
   </style>
 </head>
+
 <body>
-  <h1>🌸 櫻花留言板 🌸</h1>
+  <h1>🌸 留言板 🌸</h1>
 
   <form method="POST" action="">
     <input type="text" name="name" placeholder="你的名字" required>
@@ -93,12 +96,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <h3>留言區：</h3>
     <?php
     if (file_exists($filename)) {
-        $lines = file($filename, FILE_IGNORE_NEW_LINES);
-        foreach (array_reverse($lines) as $line) {
-            echo "<div class='message'>" . htmlspecialchars($line) . "</div>";
-        }
+      $lines = file($filename, FILE_IGNORE_NEW_LINES);
+      foreach (array_reverse($lines) as $line) {
+        echo "<div class='message'>" . htmlspecialchars($line) . "</div>";
+      }
     } else {
-        echo "<p>目前還沒有留言。</p>";
+      echo "<p>目前還沒有留言。</p>";
     }
     ?>
   </div>
@@ -120,35 +123,25 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       canvas.height = height;
     });
 
-    const sakuraCount = 50;
+    const sakuraImage = new Image();
+    sakuraImage.src = "https://i.imgur.com/j4VY3pF.png";
+
+    const sakuraCount = 30;
     const sakuras = [];
 
     for (let i = 0; i < sakuraCount; i++) {
       sakuras.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        r: Math.random() * 5 + 2,
+        r: Math.random() * 20 + 20,
         d: Math.random() * 1 + 0.5
       });
-    }
-
-    function drawSakura() {
-      ctx.clearRect(0, 0, width, height);
-      ctx.fillStyle = "#f9aacd";
-      ctx.beginPath();
-      for (let i = 0; i < sakuraCount; i++) {
-        const p = sakuras[i];
-        ctx.moveTo(p.x, p.y);
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2, true);
-      }
-      ctx.fill();
-      updateSakura();
     }
 
     function updateSakura() {
       for (let i = 0; i < sakuraCount; i++) {
         const p = sakuras[i];
-        p.y += p.d;
+        p.y += p.speed;
         p.x += Math.sin(p.y * 0.01) * 1;
 
         if (p.y > height) {
@@ -158,7 +151,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       }
     }
 
-    setInterval(drawSakura, 30);
+    sakuraImage.onload = () => {
+      setInterval(drawSakura, 30);
+    };
   </script>
 </body>
+
 </html>
