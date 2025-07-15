@@ -130,8 +130,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       sakuras.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        r: Math.random() * 20 + 20,
-        d: Math.random() * 1 + 0.5
+        size: Math.random() * 20 + 20,
+        speed: Math.random() * 1 + 0.5
       });
     }
 
