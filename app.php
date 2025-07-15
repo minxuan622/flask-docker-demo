@@ -124,7 +124,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     });
 
     const sakuraImage = new Image();
-    sakuraImage.src = "https://i.imgur.com/j4VY3pF.png";
+    sakuraImage.src = "https://png.pngtree.com/png-clipart/20220108/ourmid/pngtree-pink-cherry-blossom-dai-pink-petals-spring-cherry-blossom-sea-png-image_4099494.png";
 
     const sakuraCount = 30;
     const sakuras = [];
