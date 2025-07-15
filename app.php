@@ -123,10 +123,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       canvas.height = height;
     });
 
-    const sakuraImage = new Image();
-    sakuraImage.src = "https://png.pngtree.com/png-clipart/20220108/ourmid/pngtree-pink-cherry-blossom-dai-pink-petals-spring-cherry-blossom-sea-png-image_4099494.png";
-
-    const sakuraCount = 30;
+    const sakuraCount = 50;
     const sakuras = [];
 
     for (let i = 0; i < sakuraCount; i++) {
@@ -140,12 +137,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     function drawSakura() {
       ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = "#f9aacd";
+      ctx.textBaseline = "top";
+
       for (let i = 0; i < sakuraCount; i++) {
         const p = sakuras[i];
-        ctx.save();
-        ctx.globalAlpha = 0.8;
-        ctx.drawImage(sakuraImage, p.x, p.y, p.size, p.size);
-        ctx.restore();
+        ctx.font = p.size + "px serif";
+        ctx.fillText("🌸", p.x, p.y);
       }
 
       updateSakura();
@@ -164,9 +162,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       }
     }
 
-    sakuraImage.onload = () => {
-      setInterval(drawSakura, 30);
-    };
+    setInterval(drawSakura, 30);
   </script>
 </body>
 
